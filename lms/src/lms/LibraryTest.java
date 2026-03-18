@@ -1,0 +1,51 @@
+package lms;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class LibraryTest {
+
+    Library library;
+
+    @BeforeEach
+    void setUp() {
+        library = new Library();
+        library.clearBooks();
+    }
+
+    @Test
+    void testReserveIfTitleIsNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Book book = new Book(1, null, 100.0f, "Pavithra");
+            library.addBook(book);
+        });
+    }
+
+    @Test
+    void testReserveIfTitleIsBlank() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Book book = new Book(2, "", 150.0f, "Pavithra");
+            library.addBook(book);
+        });
+    }
+
+    @Test
+    void testReserveIfTitleIsWhitespace() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Book book = new Book(3, "   ", 200.0f, "Pavithra");
+            library.addBook(book);
+        });
+    }
+
+    @Test
+    void testSuccessfulReservation() throws BookNotAvailableException {
+        Book book = new Book(1, "Learn Java", 100.1f, "Pavithra");
+        library.addBook(book);
+
+        library.reserveBook(1);
+
+        assertTrue(book.isReserved(), "Book should be marked as reserved");
+    }
+}
