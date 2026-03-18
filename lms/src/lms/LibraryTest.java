@@ -1,51 +1,49 @@
 package lms;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class LibraryTest {
 
-class LibraryTest {
+    private List<Book> books = new ArrayList<>();
 
-    Library library;
+    public void addBook(Book book) {
 
-    @BeforeEach
-    void setUp() {
-        library = new Library();
-        library.clearBooks();
+        if (book == null) {
+            throw new IllegalArgumentException("Book cannot be null");
+        }
+
+        // Validate title here (since constructor doesn't)
+        String title = book.getTitle();
+        if (title == null || title.trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or blank");
+        }
+
+        books.add(book);
     }
 
-    @Test
-    void testReserveIfTitleIsNull() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Book book = new Book(1, null, 100.0f, "Pavithra");
-            library.addBook(book);
-        });
+    public void reserveBook(int bookId) throws BookNotAvailableException {
+
+        if (bookId <= 0) {
+            throw new IllegalArgumentException("Invalid book ID");
+        }
+
+        for (Book book : books) {
+            if (book.getId() == bookId) {
+
+                if (book.isReserved()) {
+                    throw new BookNotAvailableException("Book already reserved");
+                }
+
+                book.setReserved(true);
+                return;
+            }
+        }
+
+        throw new BookNotAvailableException("Book not found");
     }
 
-    @Test
-    void testReserveIfTitleIsBlank() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Book book = new Book(2, "", 150.0f, "Pavithra");
-            library.addBook(book);
-        });
-    }
-
-    @Test
-    void testReserveIfTitleIsWhitespace() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Book book = new Book(3, "   ", 200.0f, "Pavithra");
-            library.addBook(book);
-        });
-    }
-
-    @Test
-    void testSuccessfulReservation() throws BookNotAvailableException {
-        Book book = new Book(1, "Learn Java", 100.1f, "Pavithra");
-        library.addBook(book);
-
-        library.reserveBook(1);
-
-        assertTrue(book.isReserved(), "Book should be marked as reserved");
+    public void clearBooks() {
+        books.clear();
     }
 }

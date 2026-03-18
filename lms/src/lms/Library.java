@@ -1,70 +1,50 @@
 package lms;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-class Library {
+public class Library {
 
-	Map<Integer, Book> books = new HashMap<Integer, Book>();
-	void add(String id, String title, float price, String author) {
-		Integer id1 = Integer.valueOf(id);
-		Book book = new Book(id, title, price, author);
-		books.put(id1, book);
-	}
+    private List<Book> books = new ArrayList<>(); 
 
-	void reserve(String title) throws BookNotAvailableException {
-		for (Book b : books.values()) { 
-			if (b.title.equals(title) && b.getStatus() == STATUS.AVAILABLE) {
-				b.setStatus(STATUS.BOOKED);
-				System.out.println("Borrowed: " + title);
-				return;
-			}
-		}
-		throw new BookNotAvailableException("Book is not available.");
-	}
+    public void addBook(Book book) {
+        
+        if (book == null) {
+            throw new IllegalArgumentException("Book cannot be null");
+        }
 
-	List<Book> find(String title) {
-		List<Book> result = new ArrayList<>(); 
-		for (Book book : books.values()) { 
-			if (book.title.toLowerCase().contains(title.toLowerCase())) {
-				result.add(book);
-			}
-		}
-		return result;
-	}
+        
+        if (book.getTitle() == null || book.getTitle().trim().isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or blank");
+        }
 
-	Book remove(String id) throws Exception {
-		Collection<Book> booksOnly = books.values();
-		Iterator<Book> iterator = booksOnly.iterator();
+        books.add(book);
+    }
 
-		while (iterator.hasNext()) {
-			Book book = iterator.next();
-			if (book.getId().toLowerCase().equals(id.toLowerCase())) {
-				iterator.remove(); 
-				return book;
-			}
-		}
+    public void reserveBook(int bookId) throws BookNotAvailableException {
 
-		throw new Exception("No book was available for the id: " + id);
-	}
+        
+        if (bookId <= 0) {
+            throw new IllegalArgumentException("Invalid book ID");
+        }
 
-	void displayBooks() {
-		System.out.println("BOOKS AVAILABLE");
-		System.out.println("============================================");
+        for (Book book : books) {
+            if (book.getId() == bookId) {
 
-		Collection<Book> booksOnly = books.values();
-		Iterator<Book> iterator = booksOnly.iterator();
+                
+                if (book.isReserved()) {
+                    throw new BookNotAvailableException("Book already reserved");
+                }
 
-		while (iterator.hasNext()) {
-			Book book = iterator.next();
-			if (book.getStatus() == STATUS.AVAILABLE)
-				System.out.println(book + "\n\n");
+                book.setReserved(true);
+                return;
+            }
+        }    
+        throw new BookNotAvailableException("Book not found");
+    }
 
-			System.out.println("============================================");
-		}
-	}
+    
+    public void clearBooks() {
+        books.clear();
+    }
 }
