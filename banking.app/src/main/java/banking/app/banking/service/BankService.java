@@ -1,3 +1,9 @@
+package banking.app.banking.service;
+
+
+import banking.app.accounts.app.AccountRepository;
+import banking.app.banking.model.Account;
+
 public class BankService {
 
     private final AccountRepository repository;
@@ -7,13 +13,13 @@ public class BankService {
     }
 
     public void deposit(int accountNumber, double amount) {
-        Account account = repository.findById(accountNumber);
+        banking.app.accounts.app.Account account = repository.findById(accountNumber);
         account.deposit(amount);
         repository.save(account);
     }
 
     public void withdraw(int accountNumber, double amount) {
-        Account account = repository.findById(accountNumber);
+        banking.app.accounts.app.Account account = repository.findById(accountNumber);
         account.withdraw(amount);
         repository.save(account);
     }
