@@ -1,0 +1,70 @@
+
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.app {
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+}
+li {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.input-group button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+li button:first-child {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+li button:last-child {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+li div {
+    display: flex;
+    gap: 5px;
+}
+
+
+
+
+/* body {
+    font-family:Arial;
+    text-align:center;
+}
+
+ul {
+    list-style:none;
+}
+li {
+    margin: 10px;
+}
+
+.completed {
+    text-decoration:line-through;
+    color:rgb(248, 5, 5);
+} */
