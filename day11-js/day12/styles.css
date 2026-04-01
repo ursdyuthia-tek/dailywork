@@ -39,3 +39,14 @@ li div {
     display: flex;
     gap: 5px;
 }
+.error {
+    color: #e74c3c;
+    font-size: 12px;
+    display: none;
+    margin-bottom: 5px;
+}
+select {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
