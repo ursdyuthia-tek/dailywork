@@ -14,6 +14,6 @@ test("adds note on submit", () => {
  
   expect(addNote).toHaveBeenCalledWith({
     title: "Test Note",
-    status: "created"
+    status: "open"
   });
 });
