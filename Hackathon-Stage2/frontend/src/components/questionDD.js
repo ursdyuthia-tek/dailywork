@@ -17,7 +17,7 @@ function QuestionDD({ data, questions, onChange, hideAnswers, index, errors }) {
           </option>
         ))}
       </select>
-      {errors.question && <p style={{ color: "red", margin: 0 }}>{errors.question}</p>}
+      {errors.question && <p style={{ color: "red", margin: 0, fontSize: "12px" }}>{errors.question}</p>}
 
       <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
         <div style={{ flex: 1 }}>
@@ -28,7 +28,7 @@ function QuestionDD({ data, questions, onChange, hideAnswers, index, errors }) {
             onChange={(e) => onChange(data.id, "answer", e.target.value)}
             style={{ width: "100%", padding: "8px" }}
           />
-          {errors.answer && <p style={{ color: "red", margin: 0 }}>{errors.answer}</p>}
+          {errors.answer && <p style={{ color: "red", margin: 0, fontSize: "12px" }}>{errors.answer}</p>}
         </div>
 
         <div style={{ flex: 1 }}>
@@ -39,7 +39,7 @@ function QuestionDD({ data, questions, onChange, hideAnswers, index, errors }) {
             onChange={(e) => onChange(data.id, "confirmAnswer", e.target.value)}
             style={{ width: "100%", padding: "8px" }}
           />
-          {errors.confirm && <p style={{ color: "red", margin: 0 }}>{errors.confirm}</p>}
+          {errors.confirm && <p style={{ color: "red", margin: 0, fontSize: "12px" }}>{errors.confirm}</p>}
         </div>
       </div>
     </div>

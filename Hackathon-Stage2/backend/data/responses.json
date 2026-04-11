@@ -2,6 +2,26 @@
   {
     "userId": 101,
     "questionId": 1,
-    "answer": "valid123"
+    "answer": "Dyuthi"
+  },
+  {
+    "userId": 101,
+    "questionId": 2,
+    "answer": "Black"
+  },
+  {
+    "userId": 101,
+    "questionId": 5,
+    "answer": "PetPet"
+  },
+  {
+    "userId": 101,
+    "questionId": 6,
+    "answer": "Teksys"
+  },
+  {
+    "userId": 101,
+    "questionId": 3,
+    "answer": "mysuru"
   }
 ]
